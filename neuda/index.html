@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>NeuDA</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bwcai.github.io/neuda">
+    <meta property="og:title" content="NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction">
+    <meta property="og:description" content="This paper studies implicit surface reconstruction leveraging differentiable ray casting. Previous works such as IDR and NeuS overlook the spatial context in 3D space when predicting and rendering the surface, thereby may fail to capture sharp local topologies such as small holes and structures. To mitigate the limitation, we propose a flexible neural implicit representation leveraging hierarchical voxel grids, namely Neural Deformable Anchor (NeuDA), for high-fidelity surface reconstruction. NeuDA maintains the hierarchical anchor grids where each vertex stores a 3d position (or anchor) instead of the direct embedding (or feature). We optimize the anchor grids such that different local geometry structures can be adaptively encoded. Besides, we dig into the frequency encoding strategies and introduce a simple hierarchical positional encoding method for the hierarchical anchor structure to flexibly exploit the properties of high-frequency and lowfrequency geometry and appearance. Experiments on both the DTU and BlendedMVS datasets demonstrate that NeuDA can produce promising mesh surfaces.">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction">
+    <meta name="twitter:description" content="This paper studies implicit surface reconstruction leveraging differentiable ray casting. Previous works such as IDR and NeuS overlook the spatial context in 3D space when predicting and rendering the surface, thereby may fail to capture sharp local topologies such as small holes and structures. To mitigate the limitation, we propose a flexible neural implicit representation leveraging hierarchical voxel grids, namely Neural Deformable Anchor (NeuDA), for high-fidelity surface reconstruction. NeuDA maintains the hierarchical anchor grids where each vertex stores a 3d position (or anchor) instead of the direct embedding (or feature). We optimize the anchor grids such that different local geometry structures can be adaptively encoded. Besides, we dig into the frequency encoding strategies and introduce a simple hierarchical positional encoding method for the hierarchical anchor structure to flexibly exploit the properties of high-frequency and lowfrequency geometry and appearance. Experiments on both the DTU and BlendedMVS datasets demonstrate that NeuDA can produce promising mesh surfaces.">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/codemirror.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <script src="js/video_comparison.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="header" style="text-align: center; margin: auto;">
+        <div class="row" id="title-row" style="max-width: 100%; margin: 0 auto; display: inline-block">
+            <h2 class="col-md-12 text-center" id="title">
+                <b>NeuDA</b>: Neural Deformable Anchor for <br>High-Fidelity Implicit Surface Reconstruction<br>
+                <small>
+                    CVPR 2023
+                </small>
+            </h2>
+        </div>
+        <div class="container" id="author-row" >
+            <div class="row" style="margin:0 auto;">
+                <div class="col-md-12 text-center" style="display: table; margin:0 auto">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1 text-center">
+                            <ul class="nav nav-pills nav-justified">
+                                <li>
+                                    Bowen Cai
+                                </li>
+                                <li>
+                                    Jinchi Huang
+                                </li>
+                                <li>
+                                    Rongfei Jia
+                                </li>
+                                <li>
+                                    Chengfei Lv
+                                </li>
+                                <li>
+                                    <a style="display:contents;" href="https://hufu6371.github.io/huanfu/">
+                                    Huan Fu*
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin:0 auto;">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <ul class="nav nav-pills nav-justified">
+                            <li>
+                            Tao Technology Department, Alibaba Group
+                            </li>
+                        </ul>
+                    </div>
+            </div>
+            <div class="row" style="margin:0 auto;">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            * indicates corresponding author.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('author-row').style.maxWidth = document.getElementById("title-row").clientWidth + 'px';
+    </script>
+    <div class="container" id="main">
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://arxiv.org/abs/2303.02375">
+                            <img src="./img/paper_image.jpg" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="#">
+                            <img src="./img/youtube_icon.png" height="60px">
+                                <h4><strong>Video</strong></h4>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="#" target="_blank">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code (Coming soon)</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="video-compare-container" id="materialsDiv">
+                    <video class="video" id="materials" loop playsinline autoPlay muted src="video/dtu_scan24_neus_ours.mp4" onplay="resizeAndPlay(this)"></video>
+                    
+                    <canvas height=0 class="videoMerge" id="materialsMerge"></canvas>
+                </div>
+			</div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+This paper studies implicit surface reconstruction leveraging differentiable ray casting. Previous works such as IDR and NeuS overlook the spatial context in 3D space when predicting and rendering the surface, thereby may fail to capture sharp local topologies such as small holes and structures. To mitigate the limitation, we propose a flexible neural implicit representation leveraging hierarchical voxel grids, namely Neural Deformable Anchor (NeuDA), for high-fidelity surface reconstruction. NeuDA maintains the hierarchical anchor grids where each vertex stores a 3d position (or anchor) instead of the direct embedding (or feature). We optimize the anchor grids such that different local geometry structures can be adaptively encoded. Besides, we dig into the frequency encoding strategies and introduce a simple hierarchical positional encoding method for the hierarchical anchor structure to flexibly exploit the properties of high-frequency and lowfrequency geometry and appearance. Experiments on both the DTU and BlendedMVS datasets demonstrate that NeuDA can produce promising mesh surfaces.
+                </p>
+            </div>
+        </div>
+
+        <image src="img/architecture.png" class="img-responsive" alt="overview" width="60%" style="max-height: 450px;margin:auto;"></image>
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Motivation
+                </h3>
+                <div class="text-justify">
+                    Previous approaches (such as NeuS, IDR, and UNISURF) overlook the spatial context in 3D space when predicting and rendering the surface, thereby may fail to capture sharp local topologies such as small holes and structure. To mitigate the limitation, we propose a Neural Deformable Anchor(NeuDA), for high-fidelity surface reconstruction. The main differences between the hierarchical deformable anchors representation and some baseline variants can be found as follows: 
+                    <br><br>
+                </div>
+                <div class="text-center">
+                    <img src="./img/motivation.png" width="95%">
+                </div>
+                <br>
+                <div class="text-justify">
+                    (1) Methods such as NeuS, volSDF, and UNISURF sample points along a single ray; (2) Standard voxel grid approaches store a learnable embedding feature at each vertex. Spatial context could be simply handled via the feature aggregation operation; (3) The hierarchical voxel grid can further explore different receptive fields; (4) Neural deformable anchor maintains a 3D position instead of a feature vector at each vertex. We optimize the anchor points such that different geometry structures can be adaptively represented.
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Neural Deformable Anchor
+                </h3>
+                <div class="text-justify">
+                    We propose Neural Deformable Anchor (NeuDA), a new neural implicit representation for high-fidelity surface reconstruction leveraging multi-level voxel grids. Specifically, we store the 3D position, namely the anchor point, instead of the regular embedding (or feature) at each vertex. The input feature for a query point is obtained by directly interpolating the frequency embedding of its eight adjacent anchors. The anchor points are optimized through backpropagation, thus would show flexibility in modeling different fine-grained geometric structures.
+                </div>
+                <div class="text-center">
+                    <video id="ide" width="100%" playsinline autoplay loop muted>
+                        <source src="video/proof_da.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Results on DTU dataset
+                </h3>
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video" width="100%" controls playsinline autoplay loop muted>
+                        <source src="video/dtu_sota_cmp.mp4" type="video/mp4" />
+                    </video>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Results on BMVS dataset
+                </h3>
+                <br>
+                <div class="video-compare-container" style="width: 100%">
+                    <img src="./img/bmvs-cmp.jpg" width="100%">
+                </div>
+			</div>
+        </div>
+            
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{cai2023neuda,
+  title={NeuDA: Neural Deformable Anchor for High-Fidelity Implicit Surface Reconstruction},
+  author={Cai, Bowen and Huang, Jinchi and Jia, Rongfei and Lv, Chengfei and Fu, Huan},
+  journal={arXiv preprint arXiv:2303.02375},
+  year={2023}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>
