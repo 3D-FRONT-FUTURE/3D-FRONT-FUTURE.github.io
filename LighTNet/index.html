@@ -40,7 +40,10 @@
     <div class="container" id="header" style="text-align: center; margin: auto;">
         <div class="row" id="title-row" style="max-width: 100%; margin: 0 auto; display: inline-block">
             <h2 class="col-md-12 text-center" id="title">
-                3D Scene Creation and Rendering via Rough Meshes: <br> A Lighting Transfer Avenue<br>
+                <b>3D Scene Creation and Rendering via Rough Meshes: <br> A Lighting Transfer Avenue<br></b>
+                <small>
+                    IEEE Transactions on Pattern Analysis and Machine Intelligence (T-PAMI) 2024 
+                </small>
             </h2>
         </div>
     </div>
@@ -49,11 +52,11 @@
                 <div class="col-sm-6 col-sm-offset-3 text-center">
                     <ul class="nav nav-pills nav-justified">
                         <li>
-                            Yujie Li*
+                            Bowen Cai*
                             <br>Alibaba Group<br>
                         </li>
                         <li>
-                            Bowen Cai*
+                            Yujie Li*
                             <br>Alibaba Group<br>
                         </li>
                         <li>
@@ -138,20 +141,19 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="text-center">
                     <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://www.youtube.com/embed/d1J0aerpbiE" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        <iframe src="https://www.youtube.com/embed/d1J0aerpbiE" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
                 </div>
 			</div>
         </div>
 
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Abstract
+                    <b>Abstract</b>
                 </h3>
                 <p class="text-justify">
-This paper studies how to flexibly integrate reconstructed 3D models into practical 3D modeling pipelines such as 3D scene creation and rendering. Due to the technical difficulty, one can only obtain rough 3D models (R3DMs) for most real objects using existing 3D reconstruction techniques. As a result, physically-based rendering (PBR) would render low-quality images or videos for scenes that are constructed by R3DMs. One promising solution would be representing real-world objects as Neural Fields such as NeRFs, which are able to generate photo-realistic renderings of an object under desired viewpoints. However, a drawback is that the synthesized views through Neural Fields Rendering (NFR) cannot reflect the simulated lighting details on R3DMs in PBR pipelines, especially when object interactions in the 3D scene creation cause local shadows. To solve this dilemma, we propose a lighting transfer network (LighTNet) to bridge NFR and PBR, such that they can benefit from each other. LighTNet reasons about a simplified image composition model, remedies the uneven surface issue caused by R3DMs, and is empowered by several perceptual-motivated constraints and a new Lab angle loss which enhances the contrast between lighting strength and colors. Comparisons demonstrate that LighTNet is superior in synthesizing impressive lighting, and is promising in pushing NFR further in practical 3D modeling workflows.
+                    This paper studies how to flexibly integrate reconstructed 3D models into practical 3D modeling pipelines such as 3D scene creation and rendering. Due to the technical difficulty, one can only obtain rough 3D models (R3DMs) for most real objects using existing 3D reconstruction techniques. As a result, physically-based rendering (PBR) would render low-quality images or videos for scenes that are constructed by R3DMs. One promising solution would be representing real-world objects as Neural Fields such as NeRFs, which are able to generate photo-realistic renderings of an object under desired viewpoints. However, a drawback is that the synthesized views through Neural Fields Rendering (NFR) cannot reflect the simulated lighting details on R3DMs in PBR pipelines, especially when object interactions in the 3D scene creation cause local shadows. To solve this dilemma, we propose a lighting transfer network (LighTNet) to bridge NFR and PBR, such that they can benefit from each other. LighTNet reasons about a simplified image composition model, remedies the uneven surface issue caused by R3DMs, and is empowered by several perceptual-motivated constraints and a new Lab angle loss which enhances the contrast between lighting strength and colors. Comparisons demonstrate that LighTNet is superior in synthesizing impressive lighting, and is promising in pushing NFR further in practical 3D modeling workflows.
                 </p>
                 <br>
                 <image src="img/architecture.jpg" class="img-responsive" alt="overview" width="95%" style="margin:auto;">
@@ -162,11 +164,11 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Interior Design
+                    <b>Interior Design</b>
                 </h3>
                 <div class="text-center">
                     <div style="position:relative;padding-top:56.25%;">
-                        <iframe src="https://www.youtube.com/embed/M7T_L5CglZs" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        <iframe src="https://www.youtube.com/embed/M7T_L5CglZs" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
                 </div>
             </div>
@@ -175,7 +177,21 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Lighting Transfer Network (LighTNet)
+                    <b>Real scenes</b>
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube.com/embed/KGwMOk-vWeE" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+                <br>
+			</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    <b>Lighting Transfer Network (LighTNet)</b>
                 </h3>
                 <div class="text-justify">
                     We propose a Lighting Transfer Network (LighTNet) to bridge NFR and PBR, such that they can benefit from each other. LighTNet takes “Shading” rendered from a PBR system and a synthesized image by NFR techniques (e.g. NeRF) as input and outputs photo-realistic renderings with rich lighting details.
@@ -193,7 +209,7 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Rendering with LighTNet and R3DMs
+                    <b>Rendering with LighTNet and R3DMs</b>
                 </h3>
                 <div class="text-justify">
                     We can represent real-world objects as individual NeRFs and R3DMs, and freely composite them to create unlimited 3D scenes. After lighting editing by artists, LighTNet can transfer direct and indirect lighting effects on R3DMs to the corresponding NFR instances.
@@ -209,7 +225,7 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Generalizing to Real-Lighting 
+                    <b>Generalizing to Real-Lighting</b>
                 </h3>
                 <div class="text-justify">
                     We reconstruct some real objects and use them to create some scenes. Here, NeRF means the 2D instance synthesized by NeRF. The lighting details have been successfully preserved by our LighTNet. Please see the shadows caused by object-to-object interactions.
@@ -223,7 +239,7 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Qualitative Comparisons
+                    <b>Qualitative Comparisons</b>
                 </h3>
                 <div class="text-justify">
                 We make qualitative comparisons with the reformulated Pix2Pix and SSVBRDF.
@@ -255,7 +271,7 @@ This paper studies how to flexibly integrate reconstructed 3D models into practi
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Acknowledgements
+                    <b>Acknowledgements</b>
                 </h3>
                 <p class="text-justify">
                 We are very grateful for the support provided by the Tao Technology Department, Alibaba Group and Alibaba Homestyler.
